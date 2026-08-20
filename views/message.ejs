@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Notification</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            UserHub
+        </div>
+
+    </nav>
+
+
+    <main class="edit-container">
+
+        <div class="edit-card notification-card">
+
+            <div class="notification-icon">
+                <%= type === "success" ? "✅" : "❌" %>
+            </div>
+
+            <h1>
+                <%= title %>
+            </h1>
+
+            <p class="email">
+                <%= message %>
+            </p>
+
+            <a
+                href="/user"
+                class="btn"
+            >
+                ← Back to Users
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

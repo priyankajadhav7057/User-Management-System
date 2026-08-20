@@ -276,3 +276,49 @@ tbody tr:hover {
         font-size: 13px;
     }
 }
+
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.btn-delete {
+    background: #ef4444;
+}
+
+.btn-delete:hover {
+    background: #dc2626;
+}
+
+
+/* notification */
+
+.delete-card {
+    text-align: center;
+}
+
+.delete-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.delete-warning {
+    color: #ef4444;
+    font-weight: 600;
+    margin: 15px 0 25px;
+}
+
+.notification-card {
+    text-align: center;
+}
+
+.notification-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.notification-card h1 {
+    margin-bottom: 15px;
+}

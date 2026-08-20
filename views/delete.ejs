@@ -4,9 +4,13 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Edit User</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Delete User</title>
 
     <link rel="stylesheet" href="/style.css">
 
@@ -30,32 +34,44 @@
 
     <main class="edit-container">
 
-        <div class="edit-card">
+        <div class="edit-card delete-card">
 
-            <h1>✏️ Edit User</h1>
+            <div class="delete-icon">
+                🗑️
+            </div>
+
+            <h1>Delete User</h1>
+
+            <p class="delete-warning">
+                You are about to permanently delete this user.
+            </p>
 
             <p class="email">
-                Editing account: <strong><%= user.email %></strong>
+                Username:
+                <strong><%= user.username %></strong>
+                <br>
+
+                Email:
+                <strong><%= user.email %></strong>
             </p>
 
 
             <form
                 method="POST"
-                action="/user/<%= user.id %>?_method=PATCH"
+                action="/user/<%= user.id %>?_method=DELETE"
             >
 
                 <div class="form-group">
 
                     <label for="username">
-                        Username
+                        Confirm Username
                     </label>
 
                     <input
                         type="text"
                         id="username"
                         name="username"
-                        value="<%= user.username %>"
-                        placeholder="Enter new username"
+                        placeholder="Enter username"
                         required
                     >
 
@@ -65,14 +81,14 @@
                 <div class="form-group">
 
                     <label for="password">
-                        Current Password
+                        Enter Password
                     </label>
 
                     <input
                         type="password"
                         id="password"
                         name="password"
-                        placeholder="Enter your password"
+                        placeholder="Enter password"
                         required
                     >
 
@@ -83,9 +99,9 @@
 
                     <button
                         type="submit"
-                        class="btn"
+                        class="btn btn-delete"
                     >
-                        Save Changes
+                        🗑️ Delete User
                     </button>
 
                     <a
@@ -98,15 +114,6 @@
                 </div>
 
             </form>
-
-
-            <!-- my changes -->
-              <!-- Delete -->
-        <form method="GET" action="/user/<%= user.id %>/delete">
-            <button type="submit" class="btn btn-delete">
-                🗑️ Delete
-            </button>
-        </form>
 
         </div>
 

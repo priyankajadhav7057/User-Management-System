@@ -84,26 +84,6 @@ app.get("/user",(req,res)=>{
 });
 
 
-//  edit route
-
-// app.get("/user/:id/edit",(req,res)=>{
-//     let {id}=req.params;
-// let q=`SELECT * FROM user WHERE id='${id}'`;
-
-//   try{
-//         connection.query(q,(err,result)=>{
-//             if(err) throw err;
-//         let user=result[0];
-//             res.render("edit.ejs",{user});
-//         });
-//     } catch(err){
-//         console.log(err)
-//         res.send("some error occurred in DB");
-//     }
-
-// });
-
-
 
 app.get("/user/:id/edit", (req, res) => {
 
@@ -130,29 +110,6 @@ app.get("/user/:id/edit", (req, res) => {
 
 // UPDATAE ROUTE
 
-
-// app.patch("/user/:id",(req,res)=>{
-//    let {password:formPass, username:newUsername}=req.body;
-    
-// let {id}=req.params;
-// let q=`SELECT * FROM user WHERE id='${id}'`;
-
-//   try{
-//         connection.query(q,(err,result)=>{
-//             if(err) throw err;
-//         let user=result[0];
-//        if(formPass != user.password){
-//         res.send("password is incorrect");
-//        }
-//             res.render("edit.ejs",{user});
-//         });
-//     } catch(err){
-//         console.log(err)
-//         res.send("some error occurred in DB");
-//     }
-
-
-// });
 
 
 
@@ -199,6 +156,120 @@ app.patch("/user/:id", (req, res) => {
     });
 });
 
+
+
+
+//delete route
+app.get("/user/:id/delete", (req, res) => {
+
+    let { id } = req.params;
+
+    let q = `SELECT * FROM user WHERE id = ?`;
+
+    connection.query(q, [id], (err, result) => {
+
+        if (err) {
+            console.log(err);
+            return res.send("Database error");
+        }
+
+        if (result.length === 0) {
+            return res.send("User not found");
+        }
+
+        let user = result[0];
+
+        res.render("delete.ejs", { user });
+    });
+});
+
+
+
+//add delete route
+app.delete("/user/:id", (req, res) => {
+
+    let { id } = req.params;
+
+    let {
+        username: formUsername,
+        password: formPassword
+    } = req.body;
+
+
+    // First find the user
+    let q = `SELECT * FROM user WHERE id = ?`;
+
+    connection.query(q, [id], (err, result) => {
+
+        if (err) {
+            console.log(err);
+            return res.send("Database error");
+        }
+
+
+        // User doesn't exist
+        if (result.length === 0) {
+            return res.send("User not found");
+        }
+
+
+        let user = result[0];
+
+
+        // Check username
+        if (formUsername !== user.username) {
+
+            // return res.send(`
+            //     <h2>❌ Username is incorrect</h2>
+            //     <p>User was NOT deleted.</p>
+            //     <a href="/user">Go Back</a>
+            // `);
+            return res.render("message.ejs", {
+    type: "error",
+    title: "Username is Incorrect",
+    message: "The username you entered is incorrect. The user was NOT deleted."
+});
+
+        }
+
+
+        // Check password
+        if (formPassword !== user.password) {
+
+            // return res.send(`
+            //     <h2>❌ Password is incorrect</h2>
+            //     <p>User was NOT deleted.</p>
+            //     <a href="/user">Go Back</a>
+            // `);
+return res.render("message.ejs", {
+    type: "error",
+    title: "Password is Incorrect",
+    message: "The password you entered is incorrect. The user was NOT deleted."
+});
+        }
+
+
+        // Delete user
+        let deleteQuery = `DELETE FROM user WHERE id = ?`;
+
+        connection.query(
+            deleteQuery,
+            [id],
+            (err, result) => {
+
+                if (err) {
+                    console.log(err);
+                    return res.send("Error deleting user");
+                }
+
+                res.redirect("/user");
+
+            }
+        );
+
+    });
+
+});
 app.listen(8080,()=>{
     console.log("server is running on port 8080");
 });
@@ -211,19 +282,3 @@ app.listen(8080,()=>{
 
 
 
-//   console.log(getRandomUser());
-
-
-
-// try{
-// connection.query(q,[data],(err,result)=>{
-//     if(err) throw err;
-//     console.log(result);
-// }) ;
-// }
-// catch (err){
-//     console.log(err);
-// }
-
-
-// connection.end();
