@@ -11,6 +11,8 @@ This project demonstrates how a backend application can connect to a MySQL datab
 - 📋 View all users
 - ✏️ Edit username
 - 🔐 Password verification before editing
+- 🔐 Username and password verification before deleting
+- 🗑️ Delete user information from MySQL
 - 💾 Update user information in MySQL
 - 🔄 Method Override for PATCH requests
 - 🎨 Responsive and interactive UI
@@ -36,7 +38,7 @@ This project demonstrates how a backend application can connect to a MySQL datab
 
 ## 📂 Project Structure
 
-```text
+````text
 SQL/
 │
 ├── index.js
@@ -51,8 +53,9 @@ SQL/
 └── views/
     ├── home.ejs
     ├── users.ejs
-    └── edit.ejs
-```
+    ├── edit.ejs
+    ├── delete.ejs
+    └── message.ejs
 
 ## ⚙️ Installation
 
@@ -60,7 +63,7 @@ SQL/
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git
-```
+````
 
 ### 2. Go into the project folder
 
@@ -138,11 +141,38 @@ http://localhost:8080
 
 ## 🌐 Application Pages
 
+## 🔄 User Management Flow
+
+The following flow shows how the Edit and Delete operations work in the application:
+
+````mermaid
+flowchart TD
+
+    A[👥 Users Page] --> B[✏️ Edit User]
+    A --> C[🗑️ Delete User]
+
+    B --> D[Edit Username]
+    D --> E[Enter Password]
+    E --> F{Check Password}
+
+    F -->|❌ Wrong| G[❌ Show Error Notification]
+    F -->|✅ Correct| H[💾 UPDATE Username]
+    H --> I[👥 Redirect to Users Page]
+
+    C --> J[Delete Confirmation]
+    J --> K[Enter Username]
+    K --> L[Enter Password]
+    L --> M{Verify Username & Password}
+
+    M -->|❌ Wrong| N[❌ Show Error Notification]
+    M -->|✅ Correct| O[🗑️ DELETE User]
+    O --> P[👥 Redirect to Users Page]
+
 ### 🏠 Home
 
 ```text
 http://localhost:8080/
-```
+````
 
 Displays the total number of registered users.
 
@@ -171,6 +201,7 @@ This project mainly demonstrates database and REST concepts.
 | Read users    | GET         | `/user`          |
 | Read one user | GET         | `/user/:id/edit` |
 | Update user   | PATCH       | `/user/:id`      |
+| Delete User   | DELETE      | `/user/:id`      |
 
 The project uses:
 
