@@ -1,0 +1,70 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME PAGE</title>
+</head>
+<body>
+    <h1>HOME PAGE</h1>
+    <p>Total users: <%= count %></p>
+    <button><a href="/user">View Users</a></button>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Management Dashboard</title>
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            UserHub
+        </div>
+
+        <div>
+            <a href="/" class="nav-link">Home</a>
+            <a href="/user" class="nav-link">Users</a>
+        </div>
+    </nav>
+
+
+    <main class="home-container">
+
+        <h1>User Management System</h1>
+
+        <p class="subtitle">
+            Manage your users easily with Node.js, Express, EJS and MySQL.
+        </p>
+
+
+        <div class="stats-card">
+
+            <h2>Total Registered Users</h2>
+
+            <div class="user-count">
+                <%= count %>
+            </div>
+
+            <a href="/user" class="btn">
+                View All Users →
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All users</title>
+    <style>
+        table,tr,th,td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>ID</th>
+        </tr>
+     <h1>All Users</h1>
+
+    <% data.forEach(user => { %>
+
+       
+  <tr>
+            <td> <%= user.username %></td>
+            <td> <%= user.email %></td>
+            <td> <%= user.id %></td>
+            <td>
+                 <form method ="GET" action="/user/<%=user.id%>/edit">
+                <button>Edit UserName</button>
+            </form>
+            </td>
+           
+        </tr>
+
+    <% }) %>
+</table>
+<br>
+    <button><a href="/">Back to Home</a></button>
+    
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit username</title>
+</head>
+<body>
+    <h1>you are about to edit a user : <%= user.email %></h1>
+    <form method="POST" action="/user/<%= user.id %>?_method=PATCH">
+        <input type="text" name="username" value="<%= user.username %>">
+        <input type="password " name="password" placeholder="enter password" value="<%= user.password %>">
+        <button type="submit">Edit</button>
+    </form>
+</body>
+</html> -->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit User</title>
+
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            UserHub
+        </div>
+
+        <div>
+            <a href="/" class="nav-link">Home</a>
+            <a href="/user" class="nav-link">Users</a>
+        </div>
+
+    </nav>
+
+
+    <main class="edit-container">
+
+        <div class="edit-card">
+
+            <h1>✏️ Edit User</h1>
+
+            <p class="email">
+                Editing account: <strong><%= user.email %></strong>
+            </p>
+
+
+            <form
+                method="POST"
+                action="/user/<%= user.id %>?_method=PATCH"
+            >
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        value="<%= user.username %>"
+                        placeholder="Enter new username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Current Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-buttons">
+
+                    <button
+                        type="submit"
+                        class="btn"
+                    >
+                        Save Changes
+                    </button>
+
+                    <a
+                        href="/user"
+                        class="btn btn-secondary"
+                    >
+                        Cancel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
