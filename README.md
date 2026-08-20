@@ -141,38 +141,11 @@ http://localhost:8080
 
 ## 🌐 Application Pages
 
-## 🔄 User Management Flow
-
-The following flow shows how the Edit and Delete operations work in the application:
-
-````mermaid
-flowchart TD
-
-    A[👥 Users Page] --> B[✏️ Edit User]
-    A --> C[🗑️ Delete User]
-
-    B --> D[Edit Username]
-    D --> E[Enter Password]
-    E --> F{Check Password}
-
-    F -->|❌ Wrong| G[❌ Show Error Notification]
-    F -->|✅ Correct| H[💾 UPDATE Username]
-    H --> I[👥 Redirect to Users Page]
-
-    C --> J[Delete Confirmation]
-    J --> K[Enter Username]
-    K --> L[Enter Password]
-    L --> M{Verify Username & Password}
-
-    M -->|❌ Wrong| N[❌ Show Error Notification]
-    M -->|✅ Correct| O[🗑️ DELETE User]
-    O --> P[👥 Redirect to Users Page]
-
 ### 🏠 Home
 
 ```text
 http://localhost:8080/
-````
+```
 
 Displays the total number of registered users.
 
@@ -191,6 +164,35 @@ http://localhost:8080/user/:id/edit
 ```
 
 Allows a user to update their username after password verification.
+
+## 🔄 User Management Flow
+
+The following flow shows how the Edit and Delete operations work in the application:
+
+````mermaid
+flowchart TD
+
+    A["👥 Users Page"]
+
+    A --> B["✏️ Edit User"]
+    A --> C["🗑️ Delete User"]
+
+    B --> D["Edit Username"]
+    D --> E["Enter Password"]
+    E --> F{"Password Correct?"}
+
+    F -->|"❌ No"| G["❌ Show Error Notification"]
+    F -->|"✅ Yes"| H["💾 Update Username"]
+    H --> I["👥 Redirect to Users Page"]
+
+    C --> J["Delete Confirmation"]
+    J --> K["Enter Username"]
+    K --> L["Enter Password"]
+    L --> M{"Username and Password Correct?"}
+
+    M -->|"❌ No"| N["❌ Show Error Notification"]
+    M -->|"✅ Yes"| O["🗑️ Delete User"]
+    O --> P["👥 Redirect to Users Page"]
 
 ## 🔄 CRUD Concepts Demonstrated
 
@@ -215,7 +217,7 @@ Database
 EJS
       ↓
 HTML UI
-```
+````
 
 ## 🔐 Password Verification
 
