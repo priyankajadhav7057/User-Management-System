@@ -63,13 +63,13 @@ SQL/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git
+git clone https://github.com/priyankajadhav7057/User-Management-System.git
 ```
 
 ### 2. Go into the project folder
 
 ```bash
-cd YOUR_REPOSITORY_NAME
+cd User-Management-System
 ```
 
 ### 3. Install dependencies
