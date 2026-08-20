@@ -38,7 +38,7 @@ This project demonstrates how a backend application can connect to a MySQL datab
 
 ## 📂 Project Structure
 
-````text
+```text
 SQL/
 │
 ├── index.js
@@ -56,6 +56,7 @@ SQL/
     ├── edit.ejs
     ├── delete.ejs
     └── message.ejs
+```
 
 ## ⚙️ Installation
 
@@ -63,7 +64,7 @@ SQL/
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY_NAME.git
-````
+```
 
 ### 2. Go into the project folder
 
@@ -117,7 +118,7 @@ const connection = mysql.createConnection({
 
 Update these values according to your local MySQL configuration.
 
-> ⚠️ For production applications, database credentials should be stored in environment variables instead of directly inside `index.js`.
+> ⚠️ **Note:** For production applications, database credentials should be stored in environment variables instead of directly inside `index.js`.
 
 ## ▶️ Run the Project
 
@@ -165,11 +166,19 @@ http://localhost:8080/user/:id/edit
 
 Allows a user to update their username after password verification.
 
+### 🗑️ Delete User
+
+```text
+http://localhost:8080/user/:id/delete
+```
+
+Allows a user to delete their account after username and password verification.
+
 ## 🔄 User Management Flow
 
-The following flow shows how the Edit and Delete operations work in the application:
+The following flow shows how the **Edit** and **Delete** operations work in the application:
 
-````mermaid
+```mermaid
 flowchart TD
 
     A["👥 Users Page"]
@@ -193,6 +202,38 @@ flowchart TD
     M -->|"❌ No"| N["❌ Show Error Notification"]
     M -->|"✅ Yes"| O["🗑️ Delete User"]
     O --> P["👥 Redirect to Users Page"]
+```
+
+### 🔁 Overall Application Flow
+
+```text
+                    👥 USERS PAGE
+                         │
+              ┌──────────┴──────────┐
+              ↓                     ↓
+          ✏️ Edit User          🗑️ Delete User
+              │                     │
+              ↓                     ↓
+       Edit Username        Delete Confirmation
+              │                     │
+              ↓                     ↓
+       Enter Password        Enter Username
+              │                     │
+              ↓                     ↓
+      Password Correct?      Enter Password
+          │       │                 │
+        ❌ No    ✅ Yes             ↓
+          │       │        Username & Password
+          ↓       ↓             Correct?
+      ❌ Error   💾 Update        │      │
+                  Username       ❌ No   ✅ Yes
+                    │              │      │
+                    ↓              ↓      ↓
+             👥 Users Page      ❌ Error  🗑️ Delete
+                                          │
+                                          ↓
+                                   👥 Users Page
+```
 
 ## 🔄 CRUD Concepts Demonstrated
 
@@ -203,9 +244,9 @@ This project mainly demonstrates database and REST concepts.
 | Read users    | GET         | `/user`          |
 | Read one user | GET         | `/user/:id/edit` |
 | Update user   | PATCH       | `/user/:id`      |
-| Delete User   | DELETE      | `/user/:id`      |
+| Delete user   | DELETE      | `/user/:id`      |
 
-The project uses:
+The project follows this basic flow:
 
 ```text
 Express Route
@@ -214,10 +255,10 @@ MySQL Query
       ↓
 Database
       ↓
-EJS
+EJS Template
       ↓
 HTML UI
-````
+```
 
 ## 🔐 Password Verification
 
@@ -231,30 +272,36 @@ if (formPass !== user.password) {
 
 If the password is correct, the username is updated.
 
+For deleting a user, the application verifies both the **username** and **password** before deleting the record.
+
+> ⚠️ This project is for learning purposes. In a real-world application, passwords should be securely hashed using a library such as `bcrypt`.
+
 ## 🎨 UI
 
 The project includes a responsive interface with:
 
-- Dashboard
-- User statistics
-- User table
-- Edit user form
-- Navigation bar
-- Hover effects
-- Responsive layout
-- Modern cards and buttons
+- 🏠 Dashboard
+- 📊 User statistics
+- 👥 User table
+- ✏️ Edit user form
+- 🗑️ Delete user form
+- 🧭 Navigation bar
+- ✨ Hover effects
+- 📱 Responsive layout
+- 🎨 Modern cards and buttons
 
 ## 📸 Screenshots
 
 Add screenshots of your project here after running it locally.
 
-Example:
+Example folder:
 
 ```text
 screenshots/
 ├── home.png
 ├── users.png
-└── edit-user.png
+├── edit-user.png
+└── delete-user.png
 ```
 
 Then add them to this README:
@@ -265,6 +312,8 @@ Then add them to this README:
 ![Users Page](screenshots/users.png)
 
 ![Edit User](screenshots/edit-user.png)
+
+![Delete User](screenshots/delete-user.png)
 ```
 
 ## 🎯 Learning Objectives
@@ -278,7 +327,7 @@ This project helped me understand:
 - SQL queries
 - Express routing
 - REST concepts
-- GET and PATCH requests
+- GET, PATCH, and DELETE requests
 - CRUD operations
 - Method Override
 - Form handling
@@ -291,7 +340,6 @@ This project helped me understand:
 Some features that can be added in the future:
 
 - ➕ Add new users
-- 🗑️ Delete users
 - 🔍 Search users
 - 📄 Pagination
 - 🔐 Password hashing with bcrypt
